@@ -1,22 +1,5 @@
+import { invalidateCFPaths } from "@/utils/invalidateCf";
 import type { NextApiRequest, NextApiResponse } from "next";
-
-// const cloudFront = new CloudFrontClient({});
-
-// async function invalidateCFPaths(paths: string[]) {
-//   await cloudFront.send(
-//     new CreateInvalidationCommand({
-//       // Set CloudFront distribution ID here
-//       DistributionId: "E2NMF6GCJEF37Y",
-//       InvalidationBatch: {
-//         CallerReference: `${Date.now()}`,
-//         Paths: {
-//           Quantity: paths.length,
-//           Items: paths,
-//         },
-//       },
-//     })
-//   );
-// }
 
 export default async function handler(
   req: NextApiRequest,
@@ -33,9 +16,9 @@ export default async function handler(
     // e.g. for "/blog/[slug]" this should be "/blog/post-1"
     await res.revalidate(`/test/${slug}`);
 
-    // if (process.env.NODE_ENV !== "development") {
-    //   await invalidateCFPaths([`/*`]);
-    // }
+    if (process.env.NODE_ENV !== "development") {
+      await invalidateCFPaths([`/*`]);
+    }
 
     return res.json({ revalidated: true, message: `${slug} page revalidated` });
   } catch (err) {
