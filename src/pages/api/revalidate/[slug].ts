@@ -1,4 +1,3 @@
-import { invalidateCFPaths } from "@/utils/invalidateCf";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -15,12 +14,6 @@ export default async function handler(
     // this should be the actual path not a rewritten path
     // e.g. for "/blog/[slug]" this should be "/blog/post-1"
     await res.revalidate(`/test/${slug}`);
-
-    if (process.env.NODE_ENV !== "development") {
-      setTimeout(() => {
-        invalidateCFPaths([`/*`]);
-      }, 3000);
-    }
 
     return res.json({ revalidated: true, message: `${slug} page revalidated` });
   } catch (err) {

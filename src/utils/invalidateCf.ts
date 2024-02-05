@@ -11,11 +11,11 @@ export async function invalidateCFPaths(paths: string[]) {
       // Set CloudFront distribution ID here
       DistributionId: "E2NMF6GCJEF37Y",
       InvalidationBatch: {
-        CallerReference: `${Date.now()}`,
         Paths: {
           Quantity: paths.length,
           Items: paths,
         },
+        CallerReference: new Date().toISOString(),
       },
     })
   );
