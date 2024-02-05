@@ -36,7 +36,11 @@ export default async function handler(
     // this should be the actual path not a rewritten path
     // e.g. for "/blog/[slug]" this should be "/blog/post-1"
     await res.revalidate(`/test/${slug}`);
-    await invalidateCFPaths([`/test/${slug}`]);
+
+    if (process.env.NODE_ENV !== "development") {
+      await invalidateCFPaths([`/*`]);
+    }
+
     return res.json({ revalidated: true, message: `${slug} page revalidated` });
   } catch (err) {
     // If there was an error, Next.js will continue
