@@ -1,6 +1,26 @@
+import {
+  CloudFrontClient,
+  CreateInvalidationCommand,
+} from "@aws-sdk/client-cloudfront";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-// E2NMF6GCJEF37Y
+const cloudFront = new CloudFrontClient({});
+
+async function invalidateCFPaths(paths: string[]) {
+  await cloudFront.send(
+    new CreateInvalidationCommand({
+      // Set CloudFront distribution ID here
+      DistributionId: "E2NMF6GCJEF37Y",
+      InvalidationBatch: {
+        CallerReference: `${Date.now()}`,
+        Paths: {
+          Quantity: paths.length,
+          Items: paths,
+        },
+      },
+    })
+  );
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,6 +36,7 @@ export default async function handler(
     // this should be the actual path not a rewritten path
     // e.g. for "/blog/[slug]" this should be "/blog/post-1"
     await res.revalidate(`/test/${slug}`);
+    await invalidateCFPaths([`/test/${slug}`]);
     return res.json({ revalidated: true, message: `${slug} page revalidated` });
   } catch (err) {
     // If there was an error, Next.js will continue
