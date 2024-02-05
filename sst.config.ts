@@ -10,11 +10,7 @@ export default {
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
-      const site = new NextjsSite(stack, "site", {
-        invalidation: {
-          paths: "all",
-        },
-      });
+      const site = new NextjsSite(stack, "site", { edge: true });
 
       stack.addOutputs({
         SiteUrl: site.url,
