@@ -1,4 +1,4 @@
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch(
     "http://www.randomnumberapi.com/api/v1.0/random?min=100&max=1000&count=1"
   );
