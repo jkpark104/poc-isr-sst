@@ -21,7 +21,7 @@ export async function getStaticPaths() {
       { params: { id: "5" } },
       // 등록된 path는 하나의 config history 인스턴스
     ],
-    fallback: false,
+    fallback: true,
   };
 }
 

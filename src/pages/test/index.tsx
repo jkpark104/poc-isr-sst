@@ -1,6 +1,6 @@
 export async function getStaticProps() {
   const res = await fetch(
-    "http://www.randomnumberapi.com/api/v1.0/random?min=100&max=1000&count=$5"
+    "http://www.randomnumberapi.com/api/v1.0/random?min=100&max=1000&count=1"
   );
 
   const data: number[] = await res.json();
