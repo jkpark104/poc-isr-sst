@@ -17,7 +17,9 @@ export default async function handler(
     await res.revalidate(`/test/${slug}`);
 
     if (process.env.NODE_ENV !== "development") {
-      await invalidateCFPaths([`/*`]);
+      setTimeout(() => {
+        invalidateCFPaths([`/*`]);
+      }, 3000);
     }
 
     return res.json({ revalidated: true, message: `${slug} page revalidated` });
