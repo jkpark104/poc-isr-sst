@@ -18,7 +18,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::396799864928:role/cloudformatino-roman
+          role-to-assume: arn:aws:iam::396799864928:role/sst-roman
           aws-region: ap-northeast-2
       - name: Deploy app
         run: |
