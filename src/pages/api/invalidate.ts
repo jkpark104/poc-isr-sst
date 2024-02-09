@@ -1,6 +1,8 @@
 import { invalidateCFPaths } from "@/utils/invalidateCf";
 import type { NextApiRequest, NextApiResponse } from "next";
 
+export const runtime = "experimental-edge";
+
 export default async function handler(_: NextApiRequest, res: NextApiResponse) {
   try {
     if (process.env.NODE_ENV !== "development") {

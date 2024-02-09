@@ -1,3 +1,5 @@
+export const runtime = "experimental-edge";
+
 export async function getStaticPaths() {
   // const res = await fetch(
   //   `http://www.randomnumberapi.com/api/v1.0/random?min=100&max=1000&count=${3}`
