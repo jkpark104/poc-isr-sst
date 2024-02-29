@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 
-export const runtime = "experimental-edge";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
